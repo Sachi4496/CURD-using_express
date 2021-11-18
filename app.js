@@ -16,18 +16,6 @@ app.post("/books", (req, res) => {
     res.send(newuser)
 })
 
-app.get("/books/:id", (req, res) => {
-    const specific = books.filter((name) => name.id === +req.params.id)
-
-    const data = {
-        api_requested_by: "Sachidanand Pradhan",
-        book : specific[0]
-    }
-
-    res.send(data)
-})
-
-
 app.patch("/books/:id" , (req, res) => {
     const newBook = books.map((auth) => {
         if(+req.params.id === auth.id) {
@@ -57,7 +45,18 @@ app.delete("/books/:id" , (req, res) => {
         books : newBook
     }
     res.send(data)
-})
+});
+
+app.get("/books/:id", (req, res) => {
+    const specific = books.filter((name) => name.id === +req.params.id)
+
+    const data = {
+        api_requested_by: "Sachidanand Pradhan",
+        book : specific[0]
+    }
+
+    res.send(data)
+});
 
 app.listen(2345, function(){
     console.log("post is listening 2345");

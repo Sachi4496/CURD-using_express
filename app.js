@@ -5,7 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-const api_requested_by="Sachidanand Pradhan"
 
 app.get("/", (req, res) => {
     res.send({api_requested_by, books})
@@ -25,7 +24,7 @@ app.patch("/books/:id" , (req, res) => {
             if(req?.body?.price) auth.price = req.body.price;
             if(req?.body?.mobile_no) auth.mobile_no = req.body.mobile_no;
         }
-        return auth
+        return newBook;
     })
 
     const data = {
@@ -48,11 +47,11 @@ app.delete("/books/:id" , (req, res) => {
 });
 
 app.get("/books/:id", (req, res) => {
-    const specific = books.filter((name) => name.id === +req.params.id)
+    const book = books.filter((name) => name.id === +req.params.id)
 
     const data = {
         api_requested_by: "Sachidanand Pradhan",
-        book : specific[0]
+        book : book[0]
     }
 
     res.send(data)
